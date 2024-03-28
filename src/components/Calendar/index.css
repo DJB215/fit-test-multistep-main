@@ -1,0 +1,30 @@
+.rbc-header {
+  color: #152456;
+  font-family: "museo-sans";
+  font-size: 18px !important;
+  height: 48px !important;
+  display: flex;
+  align-items: left;
+}
+
+.rbc-allday-cell {
+  display: none;
+}
+
+.rbc-label {
+  color: #152456;
+  font-family: "museo-sans";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rbc-event {
+  background-color: #152456;
+}
+
+.rbc-toolbar-label {
+  color: #152456;
+  font-family: "museo-sans";
+  font-size: 25px !important;
+}
