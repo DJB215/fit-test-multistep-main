@@ -6,7 +6,8 @@ import { WearRespiratorQuestion } from "./WearRespiratorQuestion";
 import { WeightQuestion } from "./WeightQuestion";
 import { useMultistepForm } from "../../useMultistepForm";
 import { Container } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Success } from "./Success";
+import "../../css/index.css";
 
 type FormData = {
   question1: string;
@@ -24,7 +25,6 @@ const INITIAL_DATA: FormData = {
 
 const MainSurvey = () => {
   const [data, setData] = useState(INITIAL_DATA);
-  const [test, setTest] = useState(false);
 
   function updateFields(fields: Partial<FormData>) {
     setData((prev) => {
@@ -42,18 +42,20 @@ const MainSurvey = () => {
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    const navigate = useNavigate();
     if (!isLastStep) return next();
-
+    alert(JSON.stringify(data, null, 2));
+    alert(data.question2);
     if (
       data.question1 == "No" &&
       data.question2 == "No" &&
       data.question3 == "No" &&
       data.question4 == "No"
     ) {
-      navigate("/success");
+      alert("Success!");
+      <Success />;
     } else {
-      setTest(false);
+      console.log(data);
+      alert("call back");
     }
     fetch("http://127.0.0.1:5000/api/survey", {
       method: "POST",
@@ -82,6 +84,7 @@ const MainSurvey = () => {
     <>
       <Container component="main" maxWidth="lg" style={{ marginTop: "130px" }}>
         <div
+          className="mainForm"
           style={{
             position: "relative",
             background: "white",

@@ -68,7 +68,7 @@ const AddEventModal = ({
             background: "white",
             width: "100px",
             border: "1px solid #152456",
-            ":hover": "false",
+            ":hover": "#152456",
           }}
         >
           Cancel

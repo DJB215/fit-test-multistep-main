@@ -27,4 +27,8 @@
   color: #152456;
   font-family: "museo-sans";
   font-size: 25px !important;
+  text-align: left;
+}
+.rbc-calendar {
+  border-color: #152456;
 }

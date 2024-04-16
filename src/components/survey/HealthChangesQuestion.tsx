@@ -28,6 +28,7 @@ export function HealthChangesQuestion({
             fontStyle: "normal",
             marginBottom: "23px",
           }}
+          id="question"
         >
           In the past year, have you experienced any significant changes to your
           health affecting your ability to wear a respirator?
