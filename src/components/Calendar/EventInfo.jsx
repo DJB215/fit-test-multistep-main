@@ -1,11 +1,6 @@
 import { Typography } from "@mui/material";
-import { IEventInfo } from "./EventCalendar";
 
-interface IProps {
-  event: IEventInfo;
-}
-
-const EventInfo = ({ event }: IProps) => {
+const EventInfo = ({ event }) => {
   return (
     <>
       <Typography>{event.description}</Typography>

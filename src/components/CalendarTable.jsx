@@ -5,14 +5,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
-function createData(
-  lastName: string,
-  firstName: string,
-  id: string,
-  location: string,
-  testDate: string,
-  testTime: string
-) {
+function createData(lastName, firstName, id, location, testDate, testTime) {
   return { lastName, firstName, id, location, testDate, testTime };
 }
 

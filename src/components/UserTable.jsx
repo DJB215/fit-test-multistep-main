@@ -6,41 +6,27 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
-import EditLocation from "./EditLocation";
-import AddLocation from "./AddLocation";
-import DeleteLocation from "./DeleteLocation";
-import CalendarMenu from "./CalendarMenu";
+import EditUser from "./EditUser";
+import AddUser from "./AddUser";
+import DeleteUser from "./DeleteUser";
+import UserMenu from "./UserMenu";
+import "../css/admin.css";
 
-export default function NewLocationTable() {
+export default function UserTable() {
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
-  const [showUpdate, setShowUpdate] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
 
   function toggleShow() {
     setShow(!show);
   }
 
-  function toggleShowUpdate() {
-    setShowUpdate(!showUpdate);
-  }
-
   function toggleShowDelete() {
     setShowDelete(!showDelete);
   }
 
-  interface Location {
-    id: number;
-    room: string;
-    testers: number;
-    weekends: string;
-    location: string;
-    starttime: string;
-    endtime: string;
-  }
-
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/api/location", {
+    fetch("http://127.0.0.1:5000/api/user", {
       method: "GET",
     })
       .then((response) => response.json())
@@ -48,21 +34,15 @@ export default function NewLocationTable() {
       .catch((err) => console.log(err));
   }, []);
 
-  function newLocation(
-    location: string,
-    room: string,
-    testers: number,
-    starttime: string,
-    endtime: string
-  ) {
+  function newUser(firstname, lastname, campuskey, accesslevel, location) {
     const data = {
-      location: location,
-      room: room,
-      testers: testers,
-      starttime: starttime,
-      endtime: endtime,
+      firstname,
+      lastname,
+      campuskey,
+      accesslevel,
+      location,
     };
-    const url = "http://127.0.0.1:5000/api/location";
+    const url = "http://127.0.0.1:5000/api/user";
     fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -78,7 +58,6 @@ export default function NewLocationTable() {
         toggleShow();
         console.log(data);
         window.location.reload();
-
         // assume the add was successful
         // hide the modal
         // make sure the list is updated appropriately
@@ -88,23 +67,23 @@ export default function NewLocationTable() {
       });
   }
 
-  function updateLocation(
-    id: number,
-    location: string,
-    room: string,
-    testers: number,
-    starttime: string,
-    endtime: string
+  function updateUser(
+    id,
+    firstname,
+    lastname,
+    campuskey,
+    accesslevel,
+    location
   ) {
     const data = {
       id: id,
+      firstname: firstname,
+      lastname: lastname,
+      campuskey: campuskey,
+      accesslevel: accesslevel,
       location: location,
-      room: room,
-      testers: testers,
-      starttime: starttime,
-      endtime: endtime,
     };
-    const url = "http://127.0.0.1:5000/api/location/" + id;
+    const url = "http://127.0.0.1:5000/api/user/" + id;
     fetch(url, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -117,7 +96,7 @@ export default function NewLocationTable() {
         return response.json();
       })
       .then((data) => {
-        toggleShowUpdate();
+        toggleShow();
         console.log(data);
         window.location.reload();
         // assume the add was successful
@@ -129,8 +108,8 @@ export default function NewLocationTable() {
       });
   }
 
-  function deleteLocation(id: number) {
-    const url = "http://127.0.0.1:5000/api/location/" + id;
+  function deleteUser(id) {
+    const url = "http://127.0.0.1:5000/api/user/" + id;
     fetch(url, { method: "DELETE" })
       .then((response) => {
         if (!response.ok) {
@@ -152,9 +131,9 @@ export default function NewLocationTable() {
 
   return (
     <>
-      <CalendarMenu />
-      <AddLocation newUser={newLocation} show={show} toggleShow={toggleShow} />
+      <UserMenu />
       <TableContainer className="table-container">
+        <AddUser newUser={newUser} show={show} toggleShow={toggleShow} />
         <Table
           sx={{
             minWidth: 650,
@@ -186,65 +165,51 @@ export default function NewLocationTable() {
                   borderRight: "1px solid #152456",
                 }}
               >
-                Location
+                Name
               </TableCell>
               <TableCell
                 align="left"
                 style={{
                   fontFamily: "museo-sans",
-                  fontWeight: "bold",
                   borderRight: "1px solid #152456",
                 }}
               >
-                Room(s)
+                Campus Key
               </TableCell>
               <TableCell
                 align="center"
                 style={{
                   fontFamily: "museo-sans",
-                  fontWeight: "bold",
                   borderRight: "1px solid #152456",
                 }}
               >
-                # of Testers
+                Access Level
               </TableCell>
               <TableCell
                 align="center"
                 style={{
                   fontFamily: "museo-sans",
-                  fontWeight: "bold",
                   borderRight: "1px solid #152456",
                 }}
               >
-                Start Time
+                Location(s)
               </TableCell>
               <TableCell
                 align="center"
                 style={{
                   fontFamily: "museo-sans",
-                  fontWeight: "bold",
                   borderRight: "1px solid #152456",
                 }}
               >
-                End Time
-              </TableCell>
-              <TableCell
-                align="center"
-                style={{
-                  fontFamily: "museo-sans",
-                  fontWeight: "bold",
-                  borderRight: "1px solid #152456",
-                }}
-              >
-                Delete Location
+                Delete User
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {data.length > 0
-              ? data.map((item: Location) => (
+              ? data.map((item) => (
                   <TableRow
-                    key={item.location}
+                    key={item.id}
                     sx={{
                       fontFamily: "museo-sans",
                       fontSize: "18px",
@@ -260,17 +225,17 @@ export default function NewLocationTable() {
                         fontFamily: "museo-sans",
                       }}
                     >
-                      {item.location}
-                      <EditLocation
+                      {item.firstname} {item.lastname}
+                      <EditUser
                         id={item.id}
+                        firstname={item.firstname}
+                        lastname={item.lastname}
+                        campuskey={item.campuskey}
+                        accesslevel={item.accesslevel}
                         location={item.location}
-                        room={item.room}
-                        testers={item.testers}
-                        starttime={item.starttime}
-                        endtime={item.endtime}
-                        updateLocation={updateLocation}
-                        showUpdate={showUpdate}
-                        toggleShowUpdate={toggleShowUpdate}
+                        updateUser={updateUser}
+                        show={show}
+                        toggleShow={toggleShow}
                       />
                     </TableCell>
                     <TableCell
@@ -281,46 +246,38 @@ export default function NewLocationTable() {
                         fontFamily: "museo-sans",
                       }}
                     >
-                      {item.room}
+                      {item.campuskey}
                     </TableCell>
                     <TableCell
-                      align="center"
+                      align="left"
                       sx={{
                         backgroundColor: "#FFFFFF",
                         borderRight: "1px solid #152456",
                         fontFamily: "museo-sans",
                       }}
                     >
-                      {item.testers}
+                      {item.accesslevel}
                     </TableCell>
                     <TableCell
-                      align="center"
+                      align="left"
                       sx={{
                         backgroundColor: "#FFFFFF",
                         borderRight: "1px solid #152456",
                         fontFamily: "museo-sans",
                       }}
                     >
-                      {item.starttime}
+                      {item.location}
                     </TableCell>
                     <TableCell
                       align="center"
-                      sx={{
-                        backgroundColor: "#FFFFFF",
-                        borderRight: "1px solid #152456",
-                        fontFamily: "museo-sans",
-                      }}
-                    >
-                      {item.endtime}
-                    </TableCell>
-                    <TableCell
                       sx={{ backgroundColor: "#FFFFFF", margin: "o auto" }}
                     >
-                      <DeleteLocation
-                        deleteLocation={deleteLocation}
+                      <DeleteUser
+                        deleteUser={deleteUser}
                         id={item.id}
                         showDelete={showDelete}
                         toggleShowDelete={toggleShowDelete}
+                        sx={{ textAlign: "center" }}
                       />
                     </TableCell>
                   </TableRow>

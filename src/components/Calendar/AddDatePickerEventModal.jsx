@@ -1,9 +1,4 @@
-import React, {
-  Dispatch,
-  MouseEvent,
-  SetStateAction,
-  ChangeEvent,
-} from "react";
+import React from "react";
 import {
   TextField,
   Dialog,
@@ -19,16 +14,6 @@ import {
 } from "@mui/material";
 import { LocalizationProvider, DateTimePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { DatePickerEventFormData, ITodo } from "./EventCalendar";
-
-interface IProps {
-  open: boolean;
-  handleClose: Dispatch<SetStateAction<void>>;
-  datePickerEventFormData: DatePickerEventFormData;
-  setDatePickerEventFormData: Dispatch<SetStateAction<DatePickerEventFormData>>;
-  onAddEvent: (e: MouseEvent<HTMLButtonElement>) => void;
-  todos: ITodo[];
-}
 
 const AddDatePickerEventModal = ({
   open,
@@ -37,28 +22,28 @@ const AddDatePickerEventModal = ({
   setDatePickerEventFormData,
   onAddEvent,
   todos,
-}: IProps) => {
+}) => {
   const { description, start, end, allDay } = datePickerEventFormData;
 
   const onClose = () => {
     handleClose();
   };
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChange = (event) => {
     setDatePickerEventFormData((prevState) => ({
       ...prevState,
       [event.target.name]: event.target.value,
     }));
   };
 
-  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleCheckboxChange = (event) => {
     setDatePickerEventFormData((prevState) => ({
       ...prevState,
       allDay: event.target.checked,
     }));
   };
 
-  const handleTodoChange = (e: React.SyntheticEvent, value: ITodo | null) => {
+  const handleTodoChange = (e, value) => {
     setDatePickerEventFormData((prevState) => ({
       ...prevState,
       todoId: value?._id,
@@ -106,7 +91,7 @@ const AddDatePickerEventModal = ({
                 onChange={(newValue) =>
                   setDatePickerEventFormData((prevState) => ({
                     ...prevState,
-                    start: new Date(newValue!),
+                    start: new Date(newValue),
                   }))
                 }
                 renderInput={(params) => <TextField {...params} />}
@@ -130,7 +115,7 @@ const AddDatePickerEventModal = ({
               onChange={(newValue) =>
                 setDatePickerEventFormData((prevState) => ({
                   ...prevState,
-                  end: new Date(newValue!),
+                  end: new Date(newValue),
                 }))
               }
               renderInput={(params) => <TextField {...params} />}

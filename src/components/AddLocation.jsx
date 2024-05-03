@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 
-export default function AddLocation(props: Props) {
+export default function AddLocation(props) {
   const [room, setRoom] = useState("");
   const [testers, setTesters] = useState(0);
   const [starttime, setStarttime] = useState("");

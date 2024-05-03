@@ -1,4 +1,3 @@
-import { Dispatch, MouseEvent, SetStateAction } from "react";
 import {
   Dialog,
   DialogActions,
@@ -7,24 +6,9 @@ import {
   DialogTitle,
   Button,
 } from "@mui/material";
-import { EventFormData, IEventInfo, ITodo } from "./EventCalendar";
+// import { EventFormData } from "./EventCalendar";
 
-interface IProps {
-  open: boolean;
-  handleClose: Dispatch<SetStateAction<void>>;
-  eventFormData: EventFormData;
-  setEventFormData: Dispatch<SetStateAction<EventFormData>>;
-  onAddEvent: (e: MouseEvent<HTMLButtonElement>) => void;
-  todos: ITodo[];
-  eventDetails: IEventInfo;
-}
-
-const AddEventModal = ({
-  open,
-  handleClose,
-  onAddEvent,
-  eventDetails,
-}: IProps) => {
+const AddEventModal = ({ open, handleClose, onAddEvent, eventDetails }) => {
   const onClose = () => handleClose();
 
   const startDate = eventDetails?.start.toLocaleDateString();

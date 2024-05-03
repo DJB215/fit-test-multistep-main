@@ -1,4 +1,3 @@
-import { SetStateAction, MouseEvent, Dispatch } from "react";
 import {
   Dialog,
   DialogActions,
@@ -9,21 +8,8 @@ import {
   Box,
   Typography,
 } from "@mui/material";
-import { IEventInfo } from "./EventCalendar";
 
-interface IProps {
-  open: boolean;
-  handleClose: Dispatch<SetStateAction<void>>;
-  onDeleteEvent: (e: MouseEvent<HTMLButtonElement>) => void;
-  currentEvent: IEventInfo | null;
-}
-
-const EventInfoModal = ({
-  open,
-  handleClose,
-  onDeleteEvent,
-  currentEvent,
-}: IProps) => {
+const EventInfoModal = ({ open, handleClose, onDeleteEvent, currentEvent }) => {
   const onClose = () => {
     handleClose();
   };

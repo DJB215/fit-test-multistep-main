@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
+import { FaPencil } from "react-icons/fa6";
 
-export default function AddUser(props) {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [campuskey, setCampuskey] = useState("");
-  const [accesslevel, setAccesslevel] = useState("");
-  const [location, setLocation] = useState("");
+export default function EditUser(props) {
+  const [id, setId] = useState(props.id);
+  const [firstname, setFirstname] = useState(props.firstname);
+  const [lastname, setLastname] = useState(props.lastname);
+  const [campuskey, setCampuskey] = useState(props.campuskey);
+  const [accesslevel, setAccesslevel] = useState(props.accesslevel);
+  const [location, setLocation] = useState(props.location);
 
-  const [show, setShow] = useState(props.show);
+  const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
 
   const handleClose = () => setShow(false);
@@ -23,37 +25,20 @@ export default function AddUser(props) {
       .catch((err) => console.log(err));
   }, []);
 
-  interface Location {
-    id: number;
-    room: string;
-    testers: number;
-    weekends: string;
-    location: string;
-    starttime: string;
-    endtime: string;
-  }
-
   return (
     <>
-      <div style={{ marginLeft: 70 }}>
-        <button
-          onClick={handleShow}
-          className="block m-2 bg-purple-600 hover:bg-purple-700 font-bold py-2 px-4 rounded"
-          style={{
-            marginLeft: 10,
-            fontFamily: "museo-sans",
-            fontSize: 24,
-            width: "278px",
-            height: "48px",
-            color: "#152456",
-            backgroundColor: "white",
-            border: "1px solid #152456",
-          }}
-        >
-          Add New User +
-        </button>
-      </div>
-
+      <span
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          float: "right",
+          background: "aqua",
+          marginRight: 0,
+          padding: "10px",
+        }}
+      >
+        <FaPencil onClick={handleShow} width="20px" height="20px" />
+      </span>
       <Modal
         size="lg"
         show={show}
@@ -73,7 +58,7 @@ export default function AddUser(props) {
               fontSize: "40px",
             }}
           >
-            Add New User
+            Edit User
           </Modal.Title>
         </Modal.Header>
         <Modal.Body
@@ -84,16 +69,18 @@ export default function AddUser(props) {
           }}
         >
           <form
-            id="addmodal"
+            id="editmodal"
             className="w-full max-w-lg"
             onSubmit={(e) => {
               e.preventDefault();
+              setId(0);
               setFirstname("");
               setLastname("");
               setCampuskey("");
               setAccesslevel("");
               setLocation("");
-              props.newUser(
+              props.updateUser(
+                id,
                 firstname,
                 lastname,
                 campuskey,
@@ -105,7 +92,7 @@ export default function AddUser(props) {
             <div className="flex flex-wrap -mx-3 mb-6">
               <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <label
-                  className="block tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                   htmlFor="firstname"
                 >
                   First Name
@@ -113,7 +100,6 @@ export default function AddUser(props) {
                 <input
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="firstname"
-                  placeholder="First Name"
                   type="text"
                   value={firstname}
                   onChange={(e) => {
@@ -123,7 +109,7 @@ export default function AddUser(props) {
               </div>
               <div className="w-full md:w-1/2 px-3">
                 <label
-                  className="block tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                   htmlFor="lastname"
                 >
                   Last Name
@@ -131,7 +117,6 @@ export default function AddUser(props) {
                 <input
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="lastname"
-                  placeholder="Last Name"
                   type="text"
                   value={lastname}
                   onChange={(e) => {
@@ -143,7 +128,7 @@ export default function AddUser(props) {
             <div className="flex flex-wrap -mx-3 mb-6">
               <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <label
-                  className="block tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                   htmlFor="campuskey"
                 >
                   Campus Key
@@ -151,7 +136,6 @@ export default function AddUser(props) {
                 <input
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="campuskey"
-                  placeholder="abc123@jefferson.edu"
                   type="text"
                   value={campuskey}
                   onChange={(e) => {
@@ -161,7 +145,7 @@ export default function AddUser(props) {
               </div>
               <div className="w-full md:w-1/2 px-3">
                 <label
-                  className="block tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                   htmlFor="accesslevel"
                 >
                   Access Level
@@ -178,7 +162,7 @@ export default function AddUser(props) {
               </div>
               <div className="w-full md:w-1/2 px-3">
                 <label
-                  className="block tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                   htmlFor="location"
                 >
                   Location
@@ -190,7 +174,7 @@ export default function AddUser(props) {
                 >
                   <option value="">Select all that apply</option>
                   {data.length > 0
-                    ? data.map((item: Location) => (
+                    ? data.map((item) => (
                         <option value={item.location}>{item.location}</option>
                       ))
                     : null}
@@ -220,9 +204,9 @@ export default function AddUser(props) {
           <button
             className="text-white font-bold py-2 px-4 rounded"
             style={{ background: "#152456" }}
-            form="addmodal"
+            form="editmodal"
           >
-            Add
+            Update
           </button>
         </Modal.Footer>
       </Modal>

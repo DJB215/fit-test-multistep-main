@@ -12,16 +12,6 @@ import "../css/admin.css";
 export default function ResultsTable() {
   const [data, setData] = useState([]);
 
-  interface Survey {
-    id: number;
-    jeffid: string;
-    completeddate: EpochTimeStamp;
-    question1: string;
-    question2: string;
-    question3: string;
-    question4: string;
-  }
-
   useEffect(() => {
     fetch("http://127.0.0.1:5000/api/survey", {
       method: "GET",
@@ -129,7 +119,7 @@ export default function ResultsTable() {
           </TableHead>
           <TableBody>
             {data.length > 0
-              ? data.map((item: Survey) => (
+              ? data.map((item) => (
                   <TableRow
                     key={item.id}
                     sx={{

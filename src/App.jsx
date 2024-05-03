@@ -9,7 +9,7 @@ import UserTable from "./components/UserTable";
 import NewLocationTable from "./components/NewLocationTable";
 import ResultsTable from "./components/ResultsTable";
 import Calendar from "./components/Calendar/EventCalendar";
-import { Success } from "./components/survey/Success";
+import Success from "./components/survey/Success";
 
 function App() {
   return (

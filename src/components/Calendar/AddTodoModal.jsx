@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 import {
   Dialog,
   DialogActions,
@@ -17,21 +17,8 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import { HexColorPicker } from "react-colorful";
-import { ITodo, generateId } from "./EventCalendar";
 
-interface IProps {
-  open: boolean;
-  handleClose: Dispatch<SetStateAction<void>>;
-  todos: ITodo[];
-  setTodos: Dispatch<SetStateAction<ITodo[]>>;
-}
-
-export const AddTodoModal = ({
-  open,
-  handleClose,
-  todos,
-  setTodos,
-}: IProps) => {
+export const AddTodoModal = ({ open, handleClose, todos, setTodos }) => {
   const [color, setColor] = useState("#b32aa9");
   const [title, setTitle] = useState("");
 
@@ -40,15 +27,11 @@ export const AddTodoModal = ({
     setTodos([
       ...todos,
       {
-        _id: generateId(),
         color,
         title,
       },
     ]);
   };
-
-  const onDeletetodo = (_id: string) =>
-    setTodos(todos.filter((todo) => todo._id !== _id));
 
   const onClose = () => handleClose();
 
@@ -91,7 +74,7 @@ export const AddTodoModal = ({
                   key={todo.title}
                   secondaryAction={
                     <IconButton
-                      onClick={() => onDeletetodo(todo._id)}
+                      onClick={() => console.log("first")}
                       color="error"
                       edge="end"
                     >
