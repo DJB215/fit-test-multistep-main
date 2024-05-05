@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import MultiStepContext from "./MultiStepContext";
+import MultiStepContext from "./MultiStepContext.jsx";
 import MainSurvey from "./MainSurvey";
 
 const StepContextProvider = () => {

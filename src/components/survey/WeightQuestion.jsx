@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import Header from "../Header";
 import Footer from "../Footer";
-import multiStepContext from "./MultiStepContext";
+import multiStepContext from "./MultiStepContext.jsx";
 import { Radio } from "@mui/material";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";

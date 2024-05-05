@@ -2,8 +2,8 @@ import { useContext } from "react";
 import Header from "../Header";
 import Footer from "../Footer";
 
-import multiStepContext from "./MultiStepContext";
-import { Radio } from "@mui/material";
+import multiStepContext from "./MultiStepContext.jsx";
+import Radio from "@mui/material/Radio";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "../../css/index.css";
@@ -69,7 +69,6 @@ function HealthChangesQuestion() {
                       setUserData({ ...userData, question1: e.target.value })
                     }
                     name="question1"
-                    required
                   />
                   Yes
                   <Radio
@@ -79,7 +78,6 @@ function HealthChangesQuestion() {
                       setUserData({ ...userData, question1: e.target.value })
                     }
                     name="question1"
-                    required
                   />
                 </div>
               </div>

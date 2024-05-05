@@ -4,16 +4,12 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Header from "../Header";
 import Footer from "../Footer";
-import multiStepContext from "./MultiStepContext";
+import multiStepContext from "./MultiStepContext.jsx";
 import "../../css/index.css";
 
 function RespiratorDifficultyQuestion() {
-  const { setStep, userData, setUserData } = useContext > multiStepContext;
-
-  const handleRadioChange = (event) => {
-    setUserData({ ...userData, question4: event.target.value }); // Correctly spreading the object now
-  };
-
+  const { setStep, userData, setUserData } = useContext(multiStepContext);
+  console.log(userData);
   return (
     <>
       <div className="mainForm">
@@ -61,15 +57,19 @@ function RespiratorDifficultyQuestion() {
             <Col xs={12}>
               <div style={{ padding: "10px" }}>
                 <Radio
-                  onChange={handleRadioChange}
+                  onChange={(e) =>
+                    setUserData({ ...userData, question4: e.target.value })
+                  }
                   checked={userData["question4"] === "No"}
                   value="No"
                   name="question4"
                   required
-                />{" "}
+                />
                 No
                 <Radio
-                  onChange={handleRadioChange}
+                  onChange={(e) =>
+                    setUserData({ ...userData, question4: e.target.value })
+                  }
                   checked={userData["question4"] === "Yes"}
                   value="Yes"
                   name="question4"
@@ -81,10 +81,36 @@ function RespiratorDifficultyQuestion() {
           </Row>
           <Row className="align-items-end" style={{ marginBottom: "25px" }}>
             <Col xs={12}>
-              <button className="btn-secondary" onClick={() => setStep(3)}>
+              <button
+                style={{
+                  borderRadius: "5px",
+                  border: "1px solid #152456",
+                  width: "200px",
+                  height: "75px",
+                  color: "#152456",
+                  backgroundColor: "#ffffff",
+                  fontSize: "25px",
+                  fontFamily: "museo-sans",
+                  marginBottom: "25px",
+                }}
+                onClick={() => setStep(3)}
+              >
                 Back
               </button>
-              <button className="btn-primary" onClick={() => setStep(5)}>
+              <button
+                style={{
+                  borderRadius: "5px",
+                  border: "1px solid #152456",
+                  width: "200px",
+                  height: "75px",
+                  color: "#FFFFFF",
+                  backgroundColor: "#152456",
+                  fontSize: "25px",
+                  fontFamily: "museo-sans",
+                  marginBottom: "25px",
+                }}
+                onClick={() => setStep(5)}
+              >
                 Next
               </button>
             </Col>

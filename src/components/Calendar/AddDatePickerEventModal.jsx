@@ -18,12 +18,17 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 const AddDatePickerEventModal = ({
   open,
   handleClose,
-  datePickerEventFormData,
+  datePickerEventFormData = {
+    start: null,
+    end: null,
+    allDay: false,
+    description: "",
+  },
   setDatePickerEventFormData,
   onAddEvent,
   todos,
 }) => {
-  const { description, start, end, allDay } = datePickerEventFormData;
+  const { description, start, end, allDay } = datePickerEventFormData; // add description
 
   const onClose = () => {
     handleClose();
@@ -56,7 +61,8 @@ const AddDatePickerEventModal = ({
         return true;
       }
     };
-    if (description === "" || start === null || checkend()) {
+    if (start === null || checkend()) {
+      // add description === ""
       return true;
     }
     return false;

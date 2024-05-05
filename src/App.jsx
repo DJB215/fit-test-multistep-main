@@ -10,6 +10,7 @@ import NewLocationTable from "./components/NewLocationTable";
 import ResultsTable from "./components/ResultsTable";
 import Calendar from "./components/Calendar/EventCalendar";
 import Success from "./components/survey/Success";
+import StepContextProvider from "./components/survey/StepContextProvider.jsx";
 
 function App() {
   return (
@@ -18,7 +19,9 @@ function App() {
       <Title />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MainSurvey />} />
+          <Route element={<StepContextProvider />}>
+            <Route path="/" element={<MainSurvey />} />
+          </Route>
           <Route path="/locations" element={<NewLocationTable />} />
           <Route path="/users" element={<UserTable />} />
           <Route path="/appointments" element={<Calendar />} />

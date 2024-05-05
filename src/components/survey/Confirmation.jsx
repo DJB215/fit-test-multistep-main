@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import Header from "../Header.jsx";
 import Footer from "../Footer.jsx";
-import multiStepContext from "./MultiStepContext";
+import multiStepContext from "./MultiStepContext.jsx";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "../../css/index.css";
