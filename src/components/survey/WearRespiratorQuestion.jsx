@@ -99,6 +99,7 @@ function WearRespiratorQuestion() {
                   fontSize: "25px",
                   fontFamily: "museo-sans",
                   marginBottom: "25px",
+                  marginRight: "50px",
                 }}
                 onClick={() => setStep(2)}
               >

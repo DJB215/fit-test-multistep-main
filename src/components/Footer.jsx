@@ -11,6 +11,7 @@ const Footer = () => {
         marginTop: "227px",
         display: "flex",
         justifyContent: "center",
+        zIndex: 1,
       }}
     >
       <img

@@ -1,10 +1,31 @@
 .rbc-header {
-  color: #152456;
+  color: #ffffff;
+  background: #152456;
   font-family: "museo-sans";
-  font-size: 18px !important;
-  height: 48px !important;
+  font-size: 18px;
+  height: 48px;
   display: flex;
   align-items: left;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.flex-child {
+  flex: 1;
+}
+.flex-child:first-child {
+  margin-right: 20px;
+}
+
+.css-4vrnrd {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.rbc-button-link {
+  width: 75px;
 }
 
 .rbc-allday-cell {
@@ -31,4 +52,24 @@
 }
 .rbc-calendar {
   border-color: #152456;
+}
+
+@media only screen and (max-width: 400px) {
+  .rbc-calendar {
+    width: 400px;
+  }
+  .rbc-events-container {
+    width: 200px;
+  }
+
+  .rbc-event {
+    width: 50px;
+  }
+  .rbc-time-slot {
+    height: 400px;
+  }
+
+  rbc-header {
+    font-size: 11 px;
+  }
 }

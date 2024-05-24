@@ -4,6 +4,7 @@ const Header = () => {
       style={{
         backgroundColor: "#152456",
         position: "fixed",
+        zIndex: 1,
         top: 0,
         left: 0,
         width: "100%",
